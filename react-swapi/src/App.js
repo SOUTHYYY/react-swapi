@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Header from './components/header/Header'
 import RandomPlanet from './components/random-planet/RandomPlanet'
@@ -9,7 +9,12 @@ import StarshipDetails from './components/starship-details/StarshipDetails'
 import NotFound from './components/not-found/NotFound'
 import ItemList from './components/item-list/ItemList'
 
-function App() {
+const App = () => {
+  const [selectedPerson, setSlectedPerson] = useState(null)
+
+  const onPersonSelected = (id) => {
+    setSlectedPerson(id)
+  }
   return (
     <div className="wrapper">
       <header>
@@ -20,10 +25,10 @@ function App() {
       </div>
       <div className="row mb2">
         <div className="col-md-6">
-          <ItemList />
+          <ItemList onItemSelected={onPersonSelected}/>
         </div>
         <div className="col-md-6">
-          <PersonDetails />
+          <PersonDetails selectedPerson={selectedPerson}/>
         </div>
       </div>
     </div>
