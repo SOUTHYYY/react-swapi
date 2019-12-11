@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/header/Header'
 import RandomPlanet from './components/random-planet/RandomPlanet'
@@ -23,12 +23,12 @@ const App = () => {
       <div className='random-planet'>
         <RandomPlanet />
       </div>
-      <div className="row mb2">
+      <div className="items row mb2">
         <div className="col-md-6">
-          <ItemList onItemSelected={onPersonSelected}/>
+          <ItemList onItemSelected={onPersonSelected} />
         </div>
         <div className="col-md-6">
-          <PersonDetails selectedPerson={selectedPerson}/>
+          <PersonDetails selectedPerson={selectedPerson} />
         </div>
       </div>
     </div>

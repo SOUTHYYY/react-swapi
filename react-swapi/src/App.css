@@ -1,3 +1,16 @@
 
+.wrapper {
+    padding: 0px 100px;
+}
 
+.wrapper-content {
+    border: 2px solid #fff;
+}
 
+.random-planet{
+    width: 100%;
+}
+
+.items{
+    padding: 1rem;
+}
