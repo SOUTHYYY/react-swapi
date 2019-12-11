@@ -33,7 +33,7 @@ const RandomPlanet = () => {
   };
 
   useEffect(() => {
-    setInterval(() => {getRandomPlanet()}, 5000);
+    setInterval(getRandomPlanet, 5000);
   }, []);
 
   const hasData = !(isFetching || error);
