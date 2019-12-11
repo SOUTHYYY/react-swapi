@@ -6,9 +6,9 @@ const ErrorIndicator = () => {
   return (
     <div className="error-indicator">
       <img src={icon} alt="error icon" />
-      <span className="boom">BOOM!</span>
-      <span>something has gone terribly wrong</span>
-      <span>(but we already sent droids to fix it)</span>
+      <span className="boom">ОШИБКА!</span>
+      <span>Упс... что-то пошло нет так!</span>
+      <span>(Но мы уже послали дронов для решения этой проблемы)</span>
     </div>
   );
 };
