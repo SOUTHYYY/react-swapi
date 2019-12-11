@@ -7,7 +7,7 @@ const Header = () => {
         <>
           <div className="header d-flex">
       <h3>
-        <NavLink to='/'>Star DB</NavLink>
+        <NavLink to='/'>Star Wars API</NavLink>
       </h3>
       <ul className="d-flex">
         <li>
