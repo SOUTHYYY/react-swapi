@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./PersonDetails.css";
 import SwapiService from "../../services/SwapiService";
 import Preloader from "../preloader/Preloader";
+import search_image from "./search_img.png";
 
 const PersonDetails = ({ selectedPerson }) => {
   const swapiService = new SwapiService();
@@ -19,12 +20,17 @@ const PersonDetails = ({ selectedPerson }) => {
     });
   };
   useEffect(() => {
-    console.log('rerendered')
+    console.log("rerendered");
     updatePerson();
   }, [selectedPerson]);
 
   if (!person) {
-    return <span>Выберете персонаджа из списка</span>;
+    return (
+      <div className="nothing-at-all">
+        <span>Выберите персонажа из списка слева</span>
+        <img src={search_image} alt="search image"/>
+      </div>
+    );
   }
 
   const hasData = !(isFetching || !person);
