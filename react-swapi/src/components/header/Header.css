@@ -19,9 +19,11 @@
   }
   
   .header h3 a {
-    color: white;
+    color: #FFF;
+    transition: 0.3s;
   }
   
   .header h3 a:hover {
-    color: #00bc8c;
+    color: yellow;
+    transition: 0.3s;
   }
