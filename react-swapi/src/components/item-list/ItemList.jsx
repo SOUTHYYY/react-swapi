@@ -3,34 +3,38 @@ import "./ItemList.css";
 import SwapiService from "../../services/SwapiService";
 import Preloader from "../preloader/Preloader";
 
-const ItemList = ({onItemSelected}) => {
-  const swapiServise = new SwapiService();
-  const [peopleList, setPeopleList] = useState(null);
+const ItemList = ({ onItemSelected, getData }) => {
+  debugger
+  const [itemList, setItemList] = useState(null);
   useEffect(() => {
-    swapiServise.getAllPersons().then(peopleList => {
-      setPeopleList(peopleList);
+    getData()
+      .then(itemList => {
+        setItemList(itemList);
     });
   }, []);
 
   const renderItems = arr => {
-    return arr.map(({id, name}) => {
-      return <li className="list-group-item"
-        key={id}
-        onClick={() => onItemSelected(id)}>
-        {name}</li>;
+    return arr.map(({ id, name }) => {
+      return (
+        <li
+          className="list-group-item"
+          key={id}
+          onClick={() => onItemSelected(id)}
+        >
+          {name}
+        </li>
+      );
     });
   };
 
-  if (!peopleList) {
+  if (!itemList) {
     return <Preloader />;
   }
-  const items = renderItems(peopleList)
+  const items = renderItems(itemList);
 
   return (
     <div>
-      <ul className="item-list list-group">
-        {items}
-      </ul>
+      <ul className="item-list list-group">{items}</ul>
     </div>
   );
 };
