@@ -3,7 +3,7 @@ import { Component } from 'react'
 export default class SwapiService extends Component {
 
     _apiBase = 'https://swapi.co/api'
-    async getResourse(url) {
+    getResourse = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`)
         if (!res.ok) {
             throw new Error(`Couldn't fetch ${url}, reseived ${res.status}`)
@@ -11,32 +11,32 @@ export default class SwapiService extends Component {
         return res.json()
     }
 
-    async getAllPersons() {
+    getAllPersons = async () => {
         const res = await this.getResourse(`/people/`)
         return res.results.map(this._transformPerson)
     }
-    async getPerson(id) {
+    getPerson = async (id) => {
         const person =  await this.getResourse(`/people/${id}/`)
         return this._transformPerson(person)
     }
-    async getAllPlanets() {
+    getAllPlanets = async () => {
         const res = await this.getResourse(`/planets/`)
         return res.results.map(this._transformPlanet)
     }
-    async getPlanet(id) {
+    getPlanet = async (id) => {
         const planet = await this.getResourse(`/planets/${id}/`)
         return this._transformPlanet(planet)
     }
-    async getAllStarships() {
+    getAllStarships = async () => {
         const res = await this.getResourse(`/starships/`)
         return res.results.map(this._transformStarship)
     }
-    async getStarship(id) {
+    getStarship = async (id) => {
         const starship =  this.getResourse(`/starships/${id}/`)
         return this._transformStarship(starship)
     }
 
-    _extractId(item) {
+    _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/
         const id = item.url.match(idRegExp)[1]
         return id
