@@ -1,36 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./ItemList.css";
-import SwapiService from "../../services/SwapiService";
 import Preloader from "../preloader/Preloader";
+import WithData from "../hoc/WithData";
+import SwapiService from '../../services/SwapiService'
 
-const ItemList = ({ onItemSelected, getData }) => {
-  debugger
-  const [itemList, setItemList] = useState(null);
-  useEffect(() => {
-    getData()
-      .then(itemList => {
-        setItemList(itemList);
-    });
-  }, []);
-
-  const renderItems = arr => {
-    return arr.map(({ id, name }) => {
-      return (
-        <li
-          className="list-group-item"
-          key={id}
-          onClick={() => onItemSelected(id)}
-        >
-          {name}
-        </li>
-      );
-    });
-  };
-
-  if (!itemList) {
-    return <Preloader />;
-  }
-  const items = renderItems(itemList);
+const ItemList = ({ data, onItemSelected, children: RenderLable }) => {
+  const items = data.map(item => {
+    const { id } = item;
+    const label = RenderLable(item);
+    return (
+      <li
+        className="list-group-item"
+        key={id}
+        onClick={() => onItemSelected(id)}
+      >
+        {label}
+      </li>
+    );
+  });
 
   return (
     <div>
@@ -39,4 +26,6 @@ const ItemList = ({ onItemSelected, getData }) => {
   );
 };
 
-export default ItemList;
+const {getAllPersons} = new SwapiService()
+
+export default WithData(ItemList, getAllPersons);
