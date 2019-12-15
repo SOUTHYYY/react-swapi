@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './components/header/Header'
 import RandomPlanet from './components/random-planet/RandomPlanet'
-import PeoplePage from './components/people-page/PeoplePage';
+import { SwapiServiceProvider } from './components/swapi-service-context/SwapiServiceContext'
 import SwapiService from './services/SwapiService'
+import PersonPage from './components/pages/PersonPage'
+import PlanetPage from './components/pages/PlanetPage'
+import StarshipPage from './components/pages/StarshipPage';
+import {Switch, Route} from 'react-router-dom'
 
 const App = () => {
-
-  const swapiServise = new SwapiService();
+  const swapiService = new SwapiService()
   return (
-    <div className="wrapper">
-      <header>
-        <Header />
-      </header>
-      <div className='random-planet'>
-        <RandomPlanet />
+    <SwapiServiceProvider value={swapiService}>
+      <div className="wrapper">
+        <header>
+          <Header />
+        </header>
+        <div className='random-planet'>
+          <RandomPlanet />
+        </div>
+        <div>
+          <Switch>
+            <Route path='/persons' component={PersonPage}/>
+            <Route path='/planets' component={PlanetPage}/>
+            <Route path='/starships' component={StarshipPage}/>
+          </Switch>
+        </div>
       </div>
-      <div>
-        <PeoplePage />
-      </div>
-    </div>
+    </SwapiServiceProvider>
   )
 }
 
