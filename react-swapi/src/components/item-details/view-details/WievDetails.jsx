@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const ViewPersonDetails = ({ item, ...props }) => {
-  const { id, name, gender, birthYear, eyeColor } = item;
+const ViewPersonDetails = ({ item, image, ...props }) => {
+  const { name } = item;
   return (
     <>
       <img
         className="person-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-        alt="person"
+        src={image}
+        alt="current item"
       />
       <div className="card-body">
         <h4>{name}</h4>
@@ -21,4 +21,4 @@ const ViewPersonDetails = ({ item, ...props }) => {
   );
 };
 
-export default ViewPersonDetails
+export default ViewPersonDetails;

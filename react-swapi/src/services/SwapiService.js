@@ -42,7 +42,7 @@ export default class SwapiService extends Component {
         return res.results.map(this._transformStarship)
     }
     getStarship = async (id) => {
-        const starship =  this.getResourse(`/starships/${id}/`)
+        const starship =  await this.getResourse(`/starships/${id}/`)
         return this._transformStarship(starship)
     }
 
@@ -74,13 +74,13 @@ export default class SwapiService extends Component {
         return {
             id: this._extractId(starship),
             name: starship.name,
-            nodel: starship.nodel,
+            model: starship.model,
             manufactored: starship.manufactored,
-            costInCredits: starship.costInCredits,
+            costInCredits: starship.cost_in_credits,
             length: starship.length,
             crew: starship.crew,
             passengers: starship.passengers,
-            cargoCapacity: starship.cargoCapacity
+            cargoCapacity: starship.cargo_capacity
         }
     }
 
