@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./RandomPlanet.css";
 import SwapiService from "../../services/SwapiService";
 import ErrorIndicator from "./error-indicator/ErrorIndicator";
-import Preloader from '../preloader/Preloader'
+import Preloader from "../preloader/Preloader";
 
 const RandomPlanet = () => {
   const swapiService = new SwapiService();
 
   const [planet, setPlanet] = useState(null);
-  const [isFetching, setIsFetching] = useState(null);
+  const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
 
   const onPlanetLoaded = planet => {
     setPlanet(planet);
+    setIsFetching(false);
   };
 
-  const onError = err => {
+  const onNewError = e => {
     setError(true);
     setIsFetching(false);
   };
@@ -27,19 +28,20 @@ const RandomPlanet = () => {
       .getPlanet(id)
       .then(planet => {
         onPlanetLoaded(planet);
-        setIsFetching(false);
       })
-      .catch(onError);
+      .catch(e => {
+        onNewError();
+      });
   };
 
   useEffect(() => {
     setInterval(getRandomPlanet, 3000);
   }, []);
 
-  const hasData = !(isFetching || error);
+  const hasData = !(isFetching || error) && planet;
 
   const errorMessage = error ? <ErrorIndicator /> : null;
-  const preloader = isFetching ? <Preloader /> : null;
+  const preloader = isFetching && !error ? <Preloader /> : null;
   const content = hasData ? <PlanetView planet={planet} /> : null;
 
   return (
